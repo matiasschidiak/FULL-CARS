@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehículos | Full Cars</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav>
+            <a href="../index.html">
+                <img src="../img/logo/logo.png" alt="Full Cars">
+            </a>
+
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="paginas/vehiculos.html">Vehículos</a></li>
+                <li><a href="paginas/nosotros.html">Nosotros</a></li>
+                <li><a href="paginas/financiacion.html">Financiación</a></li>
+                <li><a href="paginas/contacto.html">Contacto</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <main>
+        <section class="catalogo">
+
+            <h1>Vehículos disponibles</h1>
+            <p>
+                Encontrá el vehículo que estás buscando.
+            </p>
+
+            <!-- BUSCADOR -->
+            <section class="buscador">
+                <input type="search" id="busqueda" placeholder="Buscar marca o modelo...">
+            </section>
+
+
+            <!-- FILTROS -->
+            <section class="filtros">
+
+                <select id="marca">
+                    <option value="">
+                        Todas las marcas
+                    </option>
+
+                    <option value="Toyota">
+                        Toyota
+                    </option>
+
+                    <option value="Volkswagen">
+                        Volkswagen
+                    </option>
+
+                    <option value="Chevrolet">
+                        Chevrolet
+                    </option>
+                </select>
+
+                <select id="año">
+
+                    <option value="">
+                        Todos los años
+                    </option>
+
+                    <option value="2021">
+                        2021
+                    </option>
+
+                    <option value="2020">
+                        2020
+                    </option>
+
+                    <option value="2019">
+                        2019
+                    </option>
+
+                </select>
+
+                <select id="transmision">
+
+                    <option value="">
+                        Todas las transmisiones
+                    </option>
+
+                    <option value="Manual">
+                        Manual
+                    </option>
+
+                    <option value="Automático">
+                        Automático
+                    </option>
+
+                </select>
+            </section>
+
+
+            <!-- LISTADO -->
+            <section class="vehiculos-container" id="lista-vehiculos">
+
+
+                <!-- VEHÍCULO -->
+                <article class="vehiculo-card" data-id="1" data-marca="Toyota" data-anio="2020"
+                    data-transmision="Automático">
+
+                    <img src="../img/autos/toyota-corolla.jpg" alt="Toyota Corolla">
+
+                    <div class="vehiculo-info">
+
+                        <h2>
+                            Toyota Corolla XEI
+                        </h2>
+
+                        <p>
+                            Año: 2020
+                        </p>
+
+                        <p>
+                            Kilometraje: 65.000 km
+                        </p>
+
+                        <p>
+                            Automático
+                        </p>
+
+                        <strong>
+                            $18.500.000
+                        </strong>
+
+                        <a href="detalle.html?id=1">
+                            Ver detalles
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- VEHÍCULO -->
+                <article class="vehiculo-card" data-id="2" data-marca="Volkswagen" data-anio="2019"
+                    data-transmision="Automático">
+
+                    <img src="../img/autos/volkswagen-vento.jpg" alt="Volkswagen Vento">
+
+                    <div class="vehiculo-info">
+
+                        <h2>
+                            Volkswagen Vento
+                        </h2>
+
+                        <p>
+                            Año: 2019
+                        </p>
+
+                        <p>
+                            Kilometraje: 72.000 km
+                        </p>
+
+                        <p>
+                            Automático
+                        </p>
+
+                        <strong>
+                            $17.800.000
+                        </strong>
+
+                        <a href="detalle.html?id=2">
+                            Ver detalles
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            2026 Full Cars.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
