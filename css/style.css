@@ -9,7 +9,7 @@
     --color-texto: #2b2b2b;
     --color-fondo: #f7f7f7;
     --color-borde: #e0e0e0;
-    --font-base: "Segoe UI", Arial, sans-serif;
+    --font-base: "Poppins", "Segoe UI", Arial, sans-serif;
 }
 
 * {
@@ -49,6 +49,10 @@ img {
 ul {
     list-style: none;
 }
+
+h1 { font-size: 2rem; font-weight: 700; }
+h2 { font-size: 1.5rem; font-weight: 700; }
+h3 { font-size: 1.15rem; font-weight: 600; }
 
 /* Botónes */
 .btn {
@@ -100,7 +104,12 @@ ul {
 header {
     background-color: var(--color-primario);
     padding: 1rem 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
+
 
 header nav {
     display: flex;
@@ -126,6 +135,8 @@ header nav ul li a {
 
 header nav ul li a:hover {
     color: var(--color-acento);
+    border-bottom: 2px solid var(--color-acento);
+    padding-bottom: 4px;
 }
 
 /* ============================
@@ -175,6 +186,13 @@ form textarea {
     resize: vertical;
 }
 
+form input:focus,
+form textarea:focus {
+    outline: none;
+    border-color: var(--color-acento);
+    box-shadow: 0 0 0 3px rgba(228, 0, 43, 0.15);
+}
+
 /* ============================
    TARJETA DE VEHÍCULO (compartida:
    index.html y vehiculos.html)
@@ -192,6 +210,15 @@ form textarea {
     object-fit: cover;
 }
 
+.vehiculo-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vehiculo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
 .vehiculo-info {
     padding: 1rem;
 }
@@ -207,6 +234,14 @@ form textarea {
     display: block;
     text-align: center;
     margin-top: 0.8rem;
+}
+
+.vehiculo-card img {
+    transition: transform 0.3s ease;
+}
+
+.vehiculo-card:hover img {
+    transform: scale(1.05);
 }
 
 
