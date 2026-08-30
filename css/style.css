@@ -1,0 +1,24 @@
+/* ============================
+   VARIABLES
+   ============================ */
+:root {
+    --color-primario: #1a1a2e;
+    --color-acento: #e63946;
+    --color-texto: #333;
+    --color-fondo: #f7f7f9;
+    --color-borde: #e0e0e0;
+    --font-base: "Segoe UI", Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-base);
+    color: var(--color-texto);
+    background-color: var(--color-fondo);
+    line-height: 1.5;
+}
