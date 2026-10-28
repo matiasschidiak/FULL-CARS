@@ -4,6 +4,7 @@
 
 USE fullcars;
 
+-- Tabla de equipamiento: cada fila es un elemento ("Climatizador") de un auto
 CREATE TABLE IF NOT EXISTS equipamiento (
   id          INT AUTO_INCREMENT PRIMARY KEY,
   vehiculo_id INT          NOT NULL,
@@ -14,6 +15,7 @@ CREATE TABLE IF NOT EXISTS equipamiento (
 -- Vacía la tabla para no duplicar los datos de ejemplo
 TRUNCATE TABLE equipamiento;
 
+-- Equipamiento de ejemplo de los autos 1, 2 y 3
 INSERT INTO equipamiento (vehiculo_id, nombre) VALUES
   (1, 'Cámara de retroceso'),
   (1, 'Pantalla multimedia'),

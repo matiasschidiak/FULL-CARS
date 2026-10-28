@@ -12,6 +12,7 @@ const vehiculoDeLaUrl = new URLSearchParams(window.location.search).get("vehicul
 
 // "2026-11-05" → "jueves 5 de noviembre"
 const formatoDia = new Intl.DateTimeFormat("es-AR", { weekday: "long", day: "numeric", month: "long" });
+// Fecha larga con la primera letra en mayúscula
 function fechaLarga(fechaTexto) {
   const texto = formatoDia.format(new Date(fechaTexto + "T00:00"));
   return texto.charAt(0).toUpperCase() + texto.slice(1); // "jueves" → "Jueves"
@@ -117,6 +118,7 @@ async function cargarMisTurnos() {
   }
 }
 
+// El cliente cancela uno de sus turnos
 async function cancelarMiTurno(turno) {
   const cuando = fechaLarga(turno.fecha) + ", " + turno.hora + " hs";
   if (!confirm("¿Cancelar tu turno del " + cuando + "?")) {
@@ -142,6 +144,7 @@ async function cancelarMiTurno(turno) {
 
 // (El horario de atención lo muestra js/horario.js, compartido con contacto.html)
 
+// Muestra el formulario o el aviso, según haya sesión
 async function prepararPagina() {
   const usuario = await sesionUsuario;
 
@@ -164,8 +167,10 @@ async function prepararPagina() {
   cargarMisTurnos();
 }
 
+// Al cambiar la fecha, buscar sus horarios libres
 campoFecha.addEventListener("change", cargarHorarios);
 
+// Reservar el turno
 formTurno.addEventListener("submit", async (evento) => {
   evento.preventDefault();
   const boton = formTurno.querySelector("button");

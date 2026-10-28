@@ -7,6 +7,7 @@
 
 const NOMBRES_DIAS = ["", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
+// Pide el horario y lo escribe en la lista
 async function mostrarHorarioAtencion() {
   const lista = document.getElementById("horario-atencion");
   if (!lista) return; // esta página no muestra el horario

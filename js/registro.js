@@ -2,6 +2,7 @@
 const formulario = document.getElementById("form-registro");
 const mensaje = document.getElementById("mensaje");
 
+// Enviar los datos de la cuenta nueva a la API
 formulario.addEventListener("submit", async (evento) => {
   evento.preventDefault();
   mensaje.textContent = "Creando cuenta…";

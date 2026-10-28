@@ -4,6 +4,7 @@
 
 USE fullcars;
 
+-- Tabla de usuarios: clientes y administradores
 CREATE TABLE IF NOT EXISTS usuarios (
   id            INT AUTO_INCREMENT PRIMARY KEY,
   nombre        VARCHAR(100) NOT NULL,

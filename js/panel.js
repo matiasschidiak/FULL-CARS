@@ -99,6 +99,7 @@ function crearCeldaTelefono(telefono, mensaje) {
   return celda;
 }
 
+// Pide las solicitudes y arma su tabla
 async function cargarSolicitudes() {
   const cuerpo = document.getElementById("lista-solicitudes");
   const mensaje = document.getElementById("mensaje-solicitudes");
@@ -181,6 +182,7 @@ const formatoDiaMensaje = new Intl.DateTimeFormat("es-AR", {
   month: "long",
 });
 
+// Pide los turnos y arma su tabla
 async function cargarTurnos() {
   const cuerpo = document.getElementById("lista-turnos");
   const mensaje = document.getElementById("mensaje-turnos");
@@ -261,6 +263,7 @@ async function cargarTurnos() {
   }
 }
 
+// Confirma, cancela o vuelve a pendiente un turno
 async function cambiarEstadoTurno(id, estado) {
   if (estado === "cancelado" && !confirm("¿Cancelar este turno? El horario queda libre para otra persona.")) {
     return;
@@ -286,6 +289,7 @@ async function cambiarEstadoTurno(id, estado) {
 
 // ---------- Consultas de Contacto ----------
 
+// Pide las consultas y arma su tabla
 async function cargarConsultas() {
   const cuerpo = document.getElementById("lista-consultas");
   const mensaje = document.getElementById("mensaje-consultas");
@@ -371,6 +375,7 @@ async function cargarConsultas() {
   }
 }
 
+// Marca una consulta como respondida o pendiente
 async function cambiarEstadoConsulta(id, estado) {
   const datosEnvio = new FormData();
   datosEnvio.append("id", id);
@@ -422,6 +427,7 @@ const formatoPrecio = new Intl.NumberFormat("es-AR", {
 });
 const formatoNumero = new Intl.NumberFormat("es-AR");
 
+// Pide los autos y arma la tabla con Ver, Editar y Borrar
 async function cargarVehiculosPanel() {
   const cuerpo = document.getElementById("lista-panel-vehiculos");
 
@@ -475,6 +481,7 @@ async function cargarVehiculosPanel() {
   }
 }
 
+// Botón chico con su acción al hacer clic
 function crearBotonChico(texto, alHacerClic) {
   const boton = document.createElement("button");
   boton.type = "button";
@@ -543,11 +550,13 @@ function salirDeEdicion() {
   botonCancelar.hidden = true;
 }
 
+// Cancelar la edición
 botonCancelar.addEventListener("click", () => {
   salirDeEdicion();
   mensajeVehiculo.textContent = "";
 });
 
+// Guardar el auto (agregar o editar según el id oculto)
 formVehiculo.addEventListener("submit", async (evento) => {
   evento.preventDefault();
   const editando = campoId.value !== "";
@@ -668,6 +677,7 @@ async function cargarHorario() {
   }
 }
 
+// Guardar el horario de los 7 días
 formHorario.addEventListener("submit", async (evento) => {
   evento.preventDefault();
   const boton = formHorario.querySelector("button");
@@ -694,6 +704,7 @@ formHorario.addEventListener("submit", async (evento) => {
 
 const PESTANAS = ["vehiculos", "turnos", "financiacion", "consultas", "horarios"];
 
+// Muestra la pestaña del # de la dirección y oculta las demás
 function mostrarPestana() {
   const elegida = window.location.hash.slice(1); // "#turnos" → "turnos"
   const actual = PESTANAS.includes(elegida) ? elegida : "vehiculos";

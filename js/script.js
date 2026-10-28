@@ -176,6 +176,7 @@ function completar(id, texto) {
   document.getElementById(id).textContent = texto || "—";
 }
 
+// Pide un auto por su id y completa la ficha
 async function cargarDetalle(seccion) {
   // Lee el ?id= de la dirección: detalles.html?id=2 → "2"
   const parametros = new URLSearchParams(window.location.search);

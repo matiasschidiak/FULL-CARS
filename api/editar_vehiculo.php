@@ -8,6 +8,7 @@ require_once __DIR__ . "/vehiculo_comun.php";
 
 exigirPost();
 
+// Id del auto a editar y datos nuevos
 $id = filter_var($_POST["id"] ?? "", FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]);
 if ($id === false) {
     responder(400, ["error" => "Falta un id válido."]);
@@ -29,6 +30,7 @@ $fotoNueva = guardarFotoSubida();   // null = se mantiene la foto actual
 try {
     $conexion->beginTransaction();
 
+    // Actualizar los datos del auto
     $consulta = $conexion->prepare(
         "UPDATE vehiculos SET
            marca = :marca, modelo = :modelo, anio = :anio, kilometraje = :kilometraje,

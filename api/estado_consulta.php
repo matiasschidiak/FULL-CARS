@@ -7,6 +7,7 @@ require_once __DIR__ . "/conexion.php";
 
 exigirPost();
 
+// Leer y validar el id y el estado nuevo
 $id     = filter_var($_POST["id"] ?? "", FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]);
 $estado = $_POST["estado"] ?? "";
 
@@ -15,6 +16,7 @@ if ($id === false || !in_array($estado, ["pendiente", "respondida"], true)) {
 }
 
 try {
+    // Comprobar que exista
     $consulta = $conexion->prepare("SELECT id FROM consultas WHERE id = :id");
     $consulta->execute(["id" => $id]);
     if (!$consulta->fetch()) {

@@ -5,6 +5,7 @@ require_once __DIR__ . "/respuesta.php";
 session_start();
 exigirPost();
 
+// Vaciar y destruir la sesión
 $_SESSION = [];
 session_destroy();
 

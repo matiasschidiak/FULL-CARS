@@ -6,6 +6,7 @@ require_once __DIR__ . "/conexion.php";
 session_start();
 exigirPost();
 
+// Datos del formulario
 $email    = trim($_POST["email"] ?? "");
 $password = $_POST["password"] ?? "";
 
@@ -13,6 +14,7 @@ if ($email === "" || $password === "") {
     responder(400, ["error" => "Completá email y contraseña."]);
 }
 
+// Buscar el usuario por email
 try {
     $consulta = $conexion->prepare(
         "SELECT id, nombre, email, rol, password_hash FROM usuarios WHERE email = :email"
@@ -29,6 +31,7 @@ if (!$usuario || !password_verify($password, $usuario["password_hash"])) {
     responder(401, ["error" => "Email o contraseña incorrectos."]);
 }
 
+// Todo bien: guardar en la sesión quién entró
 session_regenerate_id(true);
 $_SESSION["usuario_id"]     = $usuario["id"];
 $_SESSION["usuario_nombre"] = $usuario["nombre"];

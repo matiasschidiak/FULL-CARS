@@ -3,6 +3,7 @@
 
 USE fullcars;
 
+-- Tabla de turnos: una fila por cada turno reservado
 CREATE TABLE IF NOT EXISTS turnos (
   id          INT AUTO_INCREMENT PRIMARY KEY,
   usuario_id  INT  NOT NULL,                  -- quién lo sacó (sale de la sesión)

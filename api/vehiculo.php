@@ -14,6 +14,7 @@ if ($id === false) {
 }
 
 try {
+    // Datos del auto
     $consulta = $conexion->prepare(
         "SELECT id, marca, modelo, anio, kilometraje, transmision,
                 motor, combustible, precio, imagen, descripcion, destacado
@@ -29,6 +30,7 @@ try {
         exit;
     }
 
+    // Su equipamiento
     $consulta = $conexion->prepare(
         "SELECT nombre FROM equipamiento WHERE vehiculo_id = :id ORDER BY id"
     );

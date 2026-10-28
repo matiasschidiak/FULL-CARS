@@ -21,6 +21,7 @@ if (time() - $ultima < 30) {
     responder(429, ["error" => "Acabás de enviar una consulta. Esperá unos segundos antes de mandar otra."]);
 }
 
+// Datos del formulario y validaciones
 $nombre   = trim($_POST["nombre"] ?? "");
 $email    = trim($_POST["email"] ?? "");
 $telefono = trim($_POST["telefono"] ?? "");
@@ -39,6 +40,7 @@ if (mb_strlen($mensaje) < 5 || mb_strlen($mensaje) > 2000) {
     responder(400, ["error" => "Escribí tu consulta (entre 5 y 2000 caracteres)."]);
 }
 
+// Guardar la consulta
 try {
     $consulta = $conexion->prepare(
         "INSERT INTO consultas (usuario_id, nombre, email, telefono, mensaje)

@@ -2,11 +2,13 @@
 -- Se puede ejecutar más de una vez: si la tabla ya existe no la vuelve a crear,
 -- y los datos de ejemplo se cargan siempre desde cero.
 
+-- Base de datos del proyecto
 CREATE DATABASE IF NOT EXISTS fullcars
   CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE fullcars;
 
+-- Tabla de vehículos: una fila por cada auto publicado
 CREATE TABLE IF NOT EXISTS vehiculos (
   id           INT AUTO_INCREMENT PRIMARY KEY,
   marca        VARCHAR(50)   NOT NULL,
@@ -30,6 +32,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE vehiculos;
 SET FOREIGN_KEY_CHECKS = 1;
 
+-- Autos de ejemplo
 INSERT INTO vehiculos
   (marca, modelo, anio, kilometraje, transmision, motor, combustible, precio, descripcion, destacado)
 VALUES

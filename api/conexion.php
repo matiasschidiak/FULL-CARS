@@ -6,6 +6,7 @@
 // para que date() coincida con la hora real de Full Cars (importante para los turnos).
 date_default_timezone_set("America/Argentina/Buenos_Aires");
 
+// Datos para conectarse a MySQL
 $servidor   = "localhost";
 $base       = "fullcars";
 $usuario    = "root";
@@ -13,11 +14,13 @@ $contrasena = ""; // Solo para XAMPP local
 
 $dsn = "mysql:host=$servidor;dbname=$base;charset=utf8mb4";
 
+// Errores como excepciones y filas con nombres de columna
 $opciones = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 ];
 
+// Conexión; si falla, se responde con un error en JSON
 try {
     $conexion = new PDO($dsn, $usuario, $contrasena, $opciones);
 } catch (PDOException $e) {

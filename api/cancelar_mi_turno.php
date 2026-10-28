@@ -7,6 +7,7 @@ require_once __DIR__ . "/conexion.php";
 
 exigirPost();
 
+// Id del turno a cancelar
 $id = filter_var($_POST["id"] ?? "", FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]);
 if ($id === false) {
     responder(400, ["error" => "Falta un id válido."]);

@@ -17,6 +17,7 @@ function paginaActual() {
   return archivo + window.location.search;
 }
 
+// Cambia el último ítem del menú según quién esté conectado
 async function mostrarSesionEnMenu() {
   const item = document.getElementById("nav-sesion");
   if (!item) return;

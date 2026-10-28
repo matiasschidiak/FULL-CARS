@@ -7,6 +7,7 @@ require_once __DIR__ . "/conexion.php";
 
 exigirPost();
 
+// Datos del formulario y validaciones
 $nombre     = trim($_POST["nombre"] ?? "");
 $telefono   = trim($_POST["telefono"] ?? "");
 $vehiculoId = $_POST["vehiculo_id"] ?? "";   // ahora llega el id del auto elegido en el desplegable
@@ -42,6 +43,7 @@ try {
         $vehiculo = $auto["marca"] . " " . $auto["modelo"] . " (" . $auto["anio"] . ")";
     }
 
+    // Guardar la solicitud
     $consulta = $conexion->prepare(
         "INSERT INTO solicitudes_financiacion (usuario_id, nombre, telefono, vehiculo, mensaje)
          VALUES (:usuario_id, :nombre, :telefono, :vehiculo, :mensaje)"

@@ -6,6 +6,7 @@
 header("Content-Type: application/json; charset=utf-8");
 require_once __DIR__ . "/conexion.php";
 
+// Armar la consulta (con o sin el filtro de destacados)
 $sql = "SELECT id, marca, modelo, anio, kilometraje, transmision,
                motor, combustible, precio, imagen, descripcion, destacado
         FROM vehiculos";
@@ -16,6 +17,7 @@ if (($_GET["destacados"] ?? "") === "1") {
 
 $sql .= " ORDER BY id";
 
+// Ejecutarla y devolver los autos
 try {
     $consulta = $conexion->query($sql);
     $vehiculos = $consulta->fetchAll();

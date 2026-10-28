@@ -3,6 +3,7 @@
 
 USE fullcars;
 
+-- Tabla de consultas: una fila por cada mensaje recibido
 CREATE TABLE IF NOT EXISTS consultas (
   id          INT AUTO_INCREMENT PRIMARY KEY,
   usuario_id  INT,                            -- si la envió alguien con sesión; NULL si fue un visitante

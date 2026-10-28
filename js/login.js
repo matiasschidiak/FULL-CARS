@@ -11,6 +11,7 @@ const destinoValido = /^[\w-]+\.html(\?[\w=&%-]*)?$/.test(volver);
 // El enlace "Registrate" conserva el ?volver=, así después del registro también se vuelve
 document.querySelector(".acceso > p a").href = "registro.html" + window.location.search;
 
+// Enviar email y contraseña a la API
 formulario.addEventListener("submit", async (evento) => {
   evento.preventDefault(); // evita que el navegador recargue la página
   mensaje.textContent = "Verificando…";

@@ -12,6 +12,7 @@ async function completarConSesion() {
   if (usuario.email) document.getElementById("email").value = usuario.email;
 }
 
+// Enviar la consulta a la API
 formConsulta.addEventListener("submit", async (evento) => {
   evento.preventDefault(); // antes, el navegador ponía los datos en la dirección y no se guardaban
   const boton = formConsulta.querySelector("button");

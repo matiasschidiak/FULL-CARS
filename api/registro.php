@@ -5,6 +5,7 @@ require_once __DIR__ . "/conexion.php";
 
 exigirPost();
 
+// Datos del formulario y validación
 $nombre   = trim($_POST["nombre"] ?? "");
 $email    = trim($_POST["email"] ?? "");
 $password = $_POST["password"] ?? "";
@@ -13,6 +14,7 @@ if ($nombre === "" || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($pass
     responder(400, ["error" => "Completá nombre, un email válido y una contraseña de 8 caracteres o más."]);
 }
 
+// Guardar el usuario con la contraseña cifrada
 try {
     $consulta = $conexion->prepare(
         "INSERT INTO usuarios (nombre, email, password_hash)

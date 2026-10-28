@@ -7,6 +7,7 @@ require_once __DIR__ . "/turnos_comun.php";
 
 exigirPost();
 
+// Datos del formulario y validaciones
 $fecha      = $_POST["fecha"] ?? "";
 $hora       = $_POST["hora"] ?? "";
 $motivo     = $_POST["motivo"] ?? "";
@@ -38,6 +39,7 @@ if ($vehiculoId === "") {
 }
 
 try {
+    // Si eligió un auto, que siga publicado
     if ($vehiculoId !== null) {
         $consulta = $conexion->prepare("SELECT id FROM vehiculos WHERE id = :id");
         $consulta->execute(["id" => $vehiculoId]);
@@ -52,6 +54,7 @@ try {
         responder(409, ["error" => "Ese horario ya no está disponible. Elegí otro."]);
     }
 
+    // Guardar el turno
     $consulta = $conexion->prepare(
         "INSERT INTO turnos (usuario_id, vehiculo_id, fecha, hora, motivo, telefono, comentario)
          VALUES (:usuario_id, :vehiculo_id, :fecha, :hora, :motivo, :telefono, :comentario)"

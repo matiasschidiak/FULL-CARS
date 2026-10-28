@@ -6,6 +6,7 @@ require_once __DIR__ . "/requiere_login.php";
 require_once __DIR__ . "/conexion.php";
 require_once __DIR__ . "/turnos_comun.php";
 
+// Fecha pedida en la URL, validada
 $fecha = $_GET["fecha"] ?? "";
 
 if (!fechaValidaParaTurno($fecha)) {

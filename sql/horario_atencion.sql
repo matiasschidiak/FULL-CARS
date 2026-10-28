@@ -3,6 +3,7 @@
 
 USE fullcars;
 
+-- Tabla del horario: una fila por día de la semana
 CREATE TABLE IF NOT EXISTS horario_atencion (
   dia       TINYINT    PRIMARY KEY,           -- 1 = lunes … 7 = domingo (igual que date("N") en PHP)
   abierto   TINYINT(1) NOT NULL DEFAULT 0,    -- 1 = atiende ese día, 0 = cerrado

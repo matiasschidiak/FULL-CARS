@@ -3,6 +3,7 @@
 
 USE fullcars;
 
+-- Tabla de solicitudes: una fila por cada pedido de financiación
 CREATE TABLE IF NOT EXISTS solicitudes_financiacion (
   id          INT AUTO_INCREMENT PRIMARY KEY,
   usuario_id  INT          NOT NULL,           -- quién la envió (sale de la sesión)

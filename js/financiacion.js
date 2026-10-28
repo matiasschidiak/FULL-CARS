@@ -21,6 +21,7 @@ async function cargarVehiculosEnSelect() {
   }
 }
 
+// Muestra el formulario o el aviso, según haya sesión
 async function prepararFormulario() {
   const usuario = await sesionUsuario;
 
