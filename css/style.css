@@ -18,6 +18,11 @@
     box-sizing: border-box;
 }
 
+/* El atributo hidden siempre oculta, aunque otra regla le ponga display: flex */
+[hidden] {
+    display: none !important;
+}
+
 html {
     height: 100%;
 }
@@ -115,6 +120,7 @@ header nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -125,7 +131,10 @@ header nav img {
 
 header nav ul {
     display: flex;
-    gap: 1.5rem;
+    flex-wrap: wrap;            /* si los ítems no entran, bajan a otro renglón */
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem 1.5rem;         /* 0.5rem entre renglones, 1.5rem entre ítems */
 }
 
 header nav ul li a {
@@ -137,6 +146,35 @@ header nav ul li a:hover {
     color: var(--color-acento);
     border-bottom: 2px solid var(--color-acento);
     padding-bottom: 4px;
+}
+
+/* Ítem de sesión del menú (lo completa js/sesion.js) */
+#nav-sesion {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.nav-saludo {
+    color: #fff;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.nav-salir {
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.85rem;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+}
+
+.nav-salir:hover {
+    background: var(--color-acento);
+    border-color: var(--color-acento);
 }
 
 /* ============================
@@ -238,6 +276,322 @@ form textarea:focus {
 
 .vehiculo-card img {
     transition: transform 0.3s ease;
+}
+
+/* Avisos que muestra JavaScript: "Cargando…", lista vacía, errores */
+.mensaje {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #555;
+}
+
+/* ============================
+   LOGIN, REGISTRO Y PANEL
+   ============================ */
+.acceso {
+    width: 100%;          /* como body es flex, sin esto la caja se achica a su contenido */
+    max-width: 540px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+
+/* Tarjeta más grande y cómoda: más espacio interno, campos y botón más altos */
+.acceso form {
+    padding: 2.2rem;
+    gap: 1.1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.acceso form label {
+    font-size: 1rem;
+}
+
+.acceso form input {
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+}
+
+.acceso form button {
+    padding: 0.95rem;
+    font-size: 1rem;
+    margin-top: 0.4rem;
+}
+
+.acceso h1,
+.acceso > p {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.acceso a {
+    color: var(--color-acento);
+}
+
+.panel {
+    width: 100%; /* sin esto, como body es flex, el panel se estira al ancho de la tabla */
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.panel-barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Menú propio del panel */
+.menu-panel a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.menu-panel a.activo {
+    color: var(--color-acento);
+    border-bottom: 2px solid var(--color-acento);
+    padding-bottom: 4px;
+}
+
+.menu-panel .menu-ver-sitio {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Número rojo al lado de "Turnos" o "Financiación": cuántos falta atender */
+.contador {
+    background: var(--color-acento);
+    color: #fff;
+    border-radius: 999px;
+    min-width: 1.3rem;
+    padding: 0 0.4rem;
+    font-size: 0.75rem;
+    line-height: 1.3rem;
+    text-align: center;
+}
+
+.panel-ayuda {
+    color: #666;
+    margin-bottom: 1rem;
+    max-width: 700px;
+}
+
+/* La tabla del horario tiene 4 columnas: no necesita el ancho mínimo de las otras */
+.tabla.tabla-horario {
+    min-width: 0;
+}
+
+#form-horario {
+    max-width: 600px;
+}
+
+#form-horario input[type="checkbox"] {
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.panel-seccion {
+    margin-top: 2rem;
+    scroll-margin-top: 100px; /* al hacer scroll hasta acá, que el menú fijo no tape el título */
+}
+
+.panel-seccion h2 {
+    margin-bottom: 1rem;
+}
+
+.panel-seccion h2 span {
+    color: var(--color-acento);
+}
+
+/* Formulario en grilla: los campos se acomodan en 1, 2 o 3 columnas según el ancho */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.campo-ancho {
+    grid-column: 1 / -1; /* ocupa todas las columnas */
+}
+
+.campo-check {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+form select {
+    padding: 0.6rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 4px;
+    font-family: inherit;
+    background: #fff;
+}
+
+/* Foto actual (al editar un vehículo) */
+.foto-actual {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.3rem;
+}
+
+.foto-actual img {
+    width: 90px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.foto-actual small {
+    color: #666;
+}
+
+#btn-cancelar-edicion {
+    margin-left: 0.5rem;
+}
+
+/* Botones chicos de la columna Acciones */
+.acciones {
+    white-space: nowrap;
+}
+
+.acciones a {
+    margin-right: 0.6rem;
+}
+
+.btn-chico {
+    padding: 0.25rem 0.7rem;
+    margin-right: 0.3rem;
+    border: 1px solid var(--color-primario);
+    border-radius: 4px;
+    background: #fff;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.btn-chico:hover {
+    background: var(--color-primario);
+    color: #fff;
+}
+
+.btn-peligro {
+    border-color: var(--color-acento);
+    color: var(--color-acento);
+}
+
+.btn-peligro:hover {
+    background: var(--color-acento);
+    color: #fff;
+}
+
+/* Estado de las solicitudes */
+.estado {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    margin-right: 0.5rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.estado-pendiente {
+    background: #fff4d6;
+    color: #8a5a00;
+}
+
+.estado-atendida,
+.estado-confirmado {
+    background: #e3f4e6;
+    color: #1f6b2e;
+}
+
+.estado-cancelado {
+    background: #fde3e6;
+    color: #a3001c;
+}
+
+/* En Consultas el mensaje es lo más importante: que tenga lugar para leerse */
+.tabla-consultas td:nth-child(5) {
+    min-width: 280px;
+}
+
+/* "con cuenta" debajo del email en Consultas */
+.marca-cuenta {
+    display: block;
+    color: #888;
+    font-size: 0.75rem;
+}
+
+.fila-atendida td {
+    color: #888;
+}
+
+/* Miniatura de la foto en la tabla de vehículos */
+.tabla img {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+}
+
+/* Tablas del panel */
+.tabla-scroll {
+    overflow-x: auto;
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+}
+
+.tabla {
+    width: 100%;
+    min-width: 900px; /* más angosto que esto, se desliza de costado (tabla-scroll) */
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+/* Fecha y teléfono en un solo renglón */
+.tabla td:nth-child(1),
+.tabla td:nth-child(4) {
+    white-space: nowrap;
+}
+
+.tabla th,
+.tabla td {
+    padding: 0.7rem 0.9rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.tabla th {
+    background: var(--color-primario);
+    color: #fff;
+    white-space: nowrap;
+}
+
+.tabla tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.tabla td a {
+    color: var(--color-acento);
+}
+
+.tabla + .mensaje,
+.tabla-scroll + .mensaje {
+    margin-top: 1rem;
 }
 
 .vehiculo-card:hover img {
@@ -354,47 +708,6 @@ form textarea:focus {
 
 
 /* ============================
-   NOSOTROS.HTML
-   ============================ */
-.nosotros {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 3rem auto;
-    padding: 0 1.5rem;
-}
-
-.nosotros div,
-.nosotros img {
-    flex: 1;
-}
-
-.nosotros img {
-    border-radius: 8px;
-}
-
-.valores {
-    background: #fff;
-    padding: 3rem 1.5rem;
-    text-align: center;
-}
-
-.valores > div {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    max-width: 1000px;
-    margin: 1.5rem auto 0;
-}
-
-.valores article h3 {
-    color: var(--color-acento);
-    margin-bottom: 0.5rem;
-}
-
-
-/* ============================
    FINANCIACION.HTML
    ============================ */
 .financiacion {
@@ -419,6 +732,92 @@ form textarea:focus {
 
 .formulario-financiacion {
     margin-top: 2rem;
+}
+
+/* ============================
+   TURNOS.HTML
+   ============================ */
+.turnos {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.turnos .formulario-financiacion h2 {
+    margin-bottom: 1rem;
+}
+
+.lista-turnos {
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.lista-turnos li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1rem;
+    background: #fff;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+}
+
+.lista-turnos li strong::first-letter {
+    text-transform: uppercase; /* "jueves" → "Jueves" */
+}
+
+.turno-cancelado {
+    opacity: 0.6;
+}
+
+.lista-turnos li .btn-chico {
+    margin-left: auto; /* el botón Cancelar va a la derecha */
+}
+
+.lista-horario {
+    list-style: none;
+    display: grid;
+    gap: 0.2rem;
+}
+
+/* Campo trampa para robots: fuera de la pantalla (no se usa "hidden" ni display: none
+   porque muchos robots saltean esos campos y así la trampa no funcionaría) */
+.campo-trampa {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.enlace-contacto {
+    color: var(--color-acento);
+    font-weight: 600;
+}
+
+/* En Contacto, la lista va debajo de "🕐 Horarios de atención", con sangría */
+.horario-contacto {
+    margin: 0.3rem 0 0 1.6rem;
+    font-size: 0.95rem;
+}
+
+/* Aviso para visitantes en lugar del formulario */
+.aviso-sesion {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+    text-align: center;
+}
+
+.aviso-sesion p {
+    margin-bottom: 1rem;
+}
+
+.aviso-sesion .btn {
+    margin: 0.3rem;
 }
 
 
@@ -517,6 +916,7 @@ form textarea:focus {
 
 .contactar {
     display: flex;
+    flex-wrap: wrap; /* con 3 botones, si no entran, bajan al renglón siguiente */
     gap: 1rem;
     margin-top: 1.5rem;
 }

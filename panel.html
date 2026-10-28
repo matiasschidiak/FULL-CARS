@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel | Full Cars</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- MENÚ DEL PANEL: distinto al del sitio, solo con las opciones de administración.
+         Cada enlace (#vehiculos, #turnos…) muestra una pestaña; panel.js oculta las demás. -->
+    <header>
+        <nav>
+            <a href="panel.html">
+                <img src="img/logo.jpg" alt="Full Cars">
+            </a>
+
+            <ul class="menu-panel">
+                <li><a href="#vehiculos" data-pestana="vehiculos">Vehículos</a></li>
+                <li><a href="#turnos" data-pestana="turnos">Turnos <span class="contador" id="contador-turnos" hidden></span></a></li>
+                <li><a href="#financiacion" data-pestana="financiacion">Financiación <span class="contador" id="contador-solicitudes" hidden></span></a></li>
+                <li><a href="#consultas" data-pestana="consultas">Consultas <span class="contador" id="contador-consultas" hidden></span></a></li>
+                <li><a href="#horarios" data-pestana="horarios">Horarios</a></li>
+                <li><a href="index.html" class="menu-ver-sitio">Ver sitio ↗</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Página protegida: panel.js manda al login si no hay sesión -->
+    <main class="panel">
+
+        <div class="panel-barra">
+            <h1 id="saludo">Verificando sesión…</h1>
+            <button type="button" class="btn btn-outline" id="btn-salir">Cerrar sesión</button>
+        </div>
+
+        <!-- ===================== PESTAÑA: VEHÍCULOS ===================== -->
+        <div class="pestana" id="pestana-vehiculos">
+
+        <!-- AGREGAR / EDITAR VEHÍCULO (el mismo formulario sirve para las dos cosas) -->
+        <section class="panel-seccion" id="seccion-form-vehiculo">
+
+            <h2 id="titulo-form-vehiculo">Agregar vehículo</h2>
+
+            <!-- enctype no hace falta: fetch con FormData ya envía la foto como archivo -->
+            <form id="form-vehiculo" class="form-grid">
+
+                <!-- Vacío = agregar. Con un número = editar ese vehículo -->
+                <input type="hidden" id="vehiculo-id" name="id" value="">
+
+                <div class="campo">
+                    <label for="marca">Marca *</label>
+                    <input type="text" id="marca" name="marca" required maxlength="50" placeholder="Toyota">
+                </div>
+
+                <div class="campo">
+                    <label for="modelo">Modelo *</label>
+                    <input type="text" id="modelo" name="modelo" required maxlength="100" placeholder="Corolla XEI">
+                </div>
+
+                <div class="campo">
+                    <label for="anio">Año *</label>
+                    <input type="number" id="anio" name="anio" required min="1950" max="2100" placeholder="2020">
+                </div>
+
+                <div class="campo">
+                    <label for="kilometraje">Kilometraje *</label>
+                    <input type="number" id="kilometraje" name="kilometraje" required min="0" max="2000000" placeholder="65000">
+                </div>
+
+                <div class="campo">
+                    <label for="precio">Precio en pesos *</label>
+                    <input type="number" id="precio" name="precio" required min="1" step="0.01" placeholder="18500000">
+                </div>
+
+                <div class="campo">
+                    <label for="transmision">Transmisión *</label>
+                    <select id="transmision" name="transmision" required>
+                        <option value="Manual">Manual</option>
+                        <option value="Automático">Automático</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="motor">Motor</label>
+                    <input type="text" id="motor" name="motor" maxlength="20" placeholder="2.0">
+                </div>
+
+                <div class="campo">
+                    <label for="combustible">Combustible</label>
+                    <select id="combustible" name="combustible">
+                        <option value="">Sin especificar</option>
+                        <option value="Nafta">Nafta</option>
+                        <option value="Diésel">Diésel</option>
+                        <option value="GNC">GNC</option>
+                        <option value="Híbrido">Híbrido</option>
+                        <option value="Eléctrico">Eléctrico</option>
+                    </select>
+                </div>
+
+                <div class="campo campo-ancho">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" maxlength="2000"></textarea>
+                </div>
+
+                <div class="campo campo-ancho">
+                    <label for="equipamiento">Equipamiento (uno por renglón)</label>
+                    <textarea id="equipamiento" name="equipamiento"
+                        placeholder="Cámara de retroceso&#10;Climatizador&#10;Control crucero"></textarea>
+                </div>
+
+                <div class="campo">
+                    <label for="foto">Foto (JPG, PNG o WEBP, hasta 3 MB)</label>
+                    <input type="file" id="foto" name="foto" accept="image/jpeg,image/png,image/webp">
+                    <!-- Solo al editar: muestra la foto actual -->
+                    <div class="foto-actual" id="foto-actual" hidden>
+                        <img id="foto-actual-img" src="" alt="Foto actual">
+                        <small>Foto actual. Dejá el campo vacío para conservarla.</small>
+                    </div>
+                </div>
+
+                <div class="campo campo-check">
+                    <input type="checkbox" id="destacado" name="destacado" value="1">
+                    <label for="destacado">Mostrar en "Vehículos destacados" del inicio</label>
+                </div>
+
+                <div class="campo-ancho">
+                    <button type="submit" class="btn" id="btn-guardar-vehiculo">Agregar vehículo</button>
+                    <button type="button" class="btn btn-outline" id="btn-cancelar-edicion" hidden>Cancelar</button>
+                    <p class="mensaje" id="mensaje-vehiculo"></p>
+                </div>
+
+            </form>
+        </section>
+
+        <!-- VEHÍCULOS PUBLICADOS (los completa panel.js) -->
+        <section class="panel-seccion">
+
+            <h2>Vehículos publicados <span id="cantidad-vehiculos"></span></h2>
+
+            <div class="tabla-scroll">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Vehículo</th>
+                            <th>Año</th>
+                            <th>Kilometraje</th>
+                            <th>Precio</th>
+                            <th>Destacado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-panel-vehiculos"></tbody>
+                </table>
+            </div>
+
+        </section>
+
+        </div>
+
+        <!-- ===================== PESTAÑA: TURNOS ===================== -->
+        <div class="pestana" id="pestana-turnos" hidden>
+
+        <!-- TURNOS (los completa panel.js) -->
+        <section class="panel-seccion">
+
+            <h2>Turnos <span id="cantidad-turnos"></span></h2>
+
+            <div class="tabla-scroll">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Cliente</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Motivo</th>
+                            <th>Vehículo</th>
+                            <th>Comentario</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-turnos"></tbody>
+                </table>
+            </div>
+
+            <p class="mensaje" id="mensaje-turnos">Cargando turnos…</p>
+
+        </section>
+
+        </div>
+
+        <!-- ===================== PESTAÑA: FINANCIACIÓN ===================== -->
+        <div class="pestana" id="pestana-financiacion" hidden>
+
+        <!-- SOLICITUDES DE FINANCIACIÓN (las completa panel.js) -->
+        <section class="panel-seccion">
+
+            <h2>Solicitudes de financiación <span id="cantidad-solicitudes"></span></h2>
+
+            <!-- tabla-scroll: en celulares la tabla se desliza de costado en vez de romper la página -->
+            <div class="tabla-scroll">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Vehículo</th>
+                            <th>Mensaje</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-solicitudes"></tbody>
+                </table>
+            </div>
+
+            <p class="mensaje" id="mensaje-solicitudes">Cargando solicitudes…</p>
+
+        </section>
+
+        </div>
+
+        <!-- ===================== PESTAÑA: CONSULTAS ===================== -->
+        <div class="pestana" id="pestana-consultas" hidden>
+
+        <!-- CONSULTAS DE CONTACTO (las completa panel.js) -->
+        <section class="panel-seccion">
+
+            <h2>Consultas <span id="cantidad-consultas"></span></h2>
+
+            <p class="panel-ayuda">
+                Mensajes del formulario de Contacto. Los puede enviar cualquiera, aunque no tenga cuenta.
+                Tocá el email o el teléfono para responder.
+            </p>
+
+            <div class="tabla-scroll">
+                <table class="tabla tabla-consultas">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Mensaje</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-consultas"></tbody>
+                </table>
+            </div>
+
+            <p class="mensaje" id="mensaje-consultas">Cargando consultas…</p>
+
+        </section>
+
+        </div>
+
+        <!-- ===================== PESTAÑA: HORARIOS ===================== -->
+        <div class="pestana" id="pestana-horarios" hidden>
+
+        <section class="panel-seccion">
+
+            <h2>Horario de atención</h2>
+
+            <p class="panel-ayuda">
+                Con este horario se generan los turnos (cada 30 minutos) y es el que ven los clientes
+                en la página de Turnos. Los turnos que ya están reservados no se modifican.
+            </p>
+
+            <!-- Las 7 filas (lunes a domingo) las arma panel.js con los datos de la base -->
+            <form id="form-horario">
+
+                <div class="tabla-scroll">
+                    <table class="tabla tabla-horario">
+                        <thead>
+                            <tr>
+                                <th>Día</th>
+                                <th>Abierto</th>
+                                <th>Apertura</th>
+                                <th>Cierre</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-horario"></tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn">Guardar horario</button>
+                    <p class="mensaje" id="mensaje-horario"></p>
+                </div>
+
+            </form>
+
+        </section>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>2026 Full Cars.</p>
+    </footer>
+
+    <!-- El panel no carga sesion.js: tiene su propio menú y su propio botón de cerrar sesión -->
+    <script src="js/panel.js" defer></script>
+
+</body>
+
+</html>

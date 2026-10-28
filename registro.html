@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear cuenta | Full Cars</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav>
+            <a href="index.html">
+                <img src="img/logo.jpg" alt="Full Cars">
+            </a>
+
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="vehiculos.html">Vehículos</a></li>
+                <li><a href="financiacion.html">Financiación</a></li>
+                <li><a href="turnos.html">Turnos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li id="nav-sesion"><a href="login.html">Ingresar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="acceso">
+
+        <h1>Crear cuenta</h1>
+
+        <form id="form-registro">
+
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required autocomplete="name">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+
+            <label for="password">Contraseña (mínimo 8 caracteres)</label>
+            <input type="password" id="password" name="password" required minlength="8" autocomplete="new-password">
+
+            <button type="submit" class="btn">Registrarme</button>
+
+            <p class="mensaje" id="mensaje"></p>
+
+        </form>
+
+        <p>¿Ya tenés cuenta? <a href="login.html">Iniciá sesión</a></p>
+
+    </main>
+
+    <footer>
+        <p>2026 Full Cars.</p>
+    </footer>
+
+    <script src="js/registro.js" defer></script>
+
+    <script src="js/sesion.js" defer></script>
+
+</body>
+
+</html>

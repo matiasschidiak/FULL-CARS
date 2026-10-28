@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turnos | Full Cars</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="pagina-turnos">
+
+    <!-- NAVBAR -->
+    <header>
+        <nav>
+            <a href="index.html">
+                <img src="img/logo.jpg" alt="Full Cars">
+            </a>
+
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="vehiculos.html">Vehículos</a></li>
+                <li><a href="financiacion.html">Financiación</a></li>
+                <li><a href="turnos.html">Turnos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li id="nav-sesion"><a href="login.html">Ingresar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="turnos">
+
+            <h1>Sacá tu turno</h1>
+
+            <p>
+                Reservá un horario para ver un vehículo, hacer una prueba de manejo
+                o tasar tu usado. Te esperamos en el local.
+            </p>
+
+            <!-- INFORMACIÓN (pública) -->
+            <div class="financiacion-opciones">
+
+                <article>
+                    <h2>Horarios</h2>
+                    <!-- horario.js lo completa con el horario que carga el admin -->
+                    <ul class="lista-horario" id="horario-atencion">
+                        <li>Cargando horario…</li>
+                    </ul>
+                </article>
+
+                <article>
+                    <h2>Duración</h2>
+                    <p>Cada turno dura 30 minutos. Podés reservar hasta 60 días antes.</p>
+                </article>
+
+                <article>
+                    <h2>Prueba de manejo</h2>
+                    <p>Traé tu licencia de conducir vigente.</p>
+                </article>
+
+            </div>
+
+            <!-- RESERVA (pide sesión) -->
+            <section class="formulario-financiacion">
+
+                <h2>Reservar turno</h2>
+
+                <!-- turnos.js muestra el aviso (visitante) o el formulario (con sesión) -->
+                <div class="aviso-sesion" id="aviso-sesion" hidden>
+                    <p>Para sacar un turno tenés que iniciar sesión.</p>
+                    <a href="login.html?volver=turnos.html" class="btn" id="aviso-login">Iniciar sesión</a>
+                    <a href="registro.html?volver=turnos.html" class="btn btn-outline" id="aviso-registro">Crear cuenta</a>
+                </div>
+
+                <form id="form-turno" class="form-grid" hidden>
+
+                    <div class="campo">
+                        <label for="motivo">Motivo *</label>
+                        <select id="motivo" name="motivo" required>
+                            <option value="Ver un vehículo">Ver un vehículo</option>
+                            <option value="Prueba de manejo">Prueba de manejo</option>
+                            <option value="Tasación de mi usado">Tasación de mi usado</option>
+                            <option value="Consulta general">Consulta general</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="vehiculo_id">Vehículo de interés</label>
+                        <!-- Las opciones las agrega turnos.js con los autos de la base -->
+                        <select id="vehiculo_id" name="vehiculo_id">
+                            <option value="">Ninguno en particular</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="fecha">Fecha *</label>
+                        <input type="date" id="fecha" name="fecha" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="hora">Horario *</label>
+                        <!-- Se completa al elegir la fecha, solo con los horarios libres -->
+                        <select id="hora" name="hora" required disabled>
+                            <option value="">Primero elegí una fecha</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefono">Teléfono *</label>
+                        <input type="tel" id="telefono" name="telefono" required maxlength="30" autocomplete="tel">
+                    </div>
+
+                    <div class="campo campo-ancho">
+                        <label for="comentario">Comentario</label>
+                        <textarea id="comentario" name="comentario" maxlength="500"></textarea>
+                    </div>
+
+                    <div class="campo-ancho">
+                        <button type="submit" class="btn">Reservar turno</button>
+                        <p class="mensaje" id="mensaje-turno"></p>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- MIS TURNOS (solo con sesión) -->
+            <section class="formulario-financiacion" id="mis-turnos" hidden>
+                <h2>Tus próximos turnos</h2>
+                <ul class="lista-turnos" id="lista-mis-turnos"></ul>
+                <p class="mensaje" id="mensaje-mis-turnos"></p>
+            </section>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>2026 Full Cars.</p>
+    </footer>
+
+    <script src="js/sesion.js" defer></script>
+
+    <script src="js/horario.js" defer></script>
+
+    <!-- Va DESPUÉS de sesion.js porque usa su variable sesionUsuario -->
+    <script src="js/turnos.js" defer></script>
+
+</body>
+
+</html>

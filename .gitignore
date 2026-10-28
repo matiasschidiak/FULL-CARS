@@ -1,0 +1,16 @@
+# .gitignore — archivos que Git NO tiene que subir a GitHub
+
+# Fotos que el admin sube desde el panel: son datos de la página, no código.
+# Se ignora el contenido de la carpeta, pero se conserva la carpeta (con .gitkeep)
+# para que exista al descargar el proyecto.
+img/vehiculos/*
+!img/vehiculos/.gitkeep
+
+# Configuración con contraseñas (por ejemplo, la del mail de Gmail, cuando se arme).
+# NUNCA subir contraseñas a GitHub.
+api/config_correo.php
+
+# Archivos que crean Windows y los editores
+Thumbs.db
+desktop.ini
+.vscode/

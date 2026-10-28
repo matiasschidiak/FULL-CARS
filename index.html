@@ -22,9 +22,10 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="vehiculos.html">Vehículos</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
                 <li><a href="financiacion.html">Financiación</a></li>
+                <li><a href="turnos.html">Turnos</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
+                <li id="nav-sesion"><a href="login.html">Ingresar</a></li>
             </ul>
         </nav>
     </header>
@@ -56,68 +57,8 @@
 
             <h2>Vehículos destacados</h2>
 
-            <div class="vehiculos-container">
-
-                <!-- VEHÍCULO -->
-                <article class="vehiculo-card">
-
-                    <img src="img/autoejemplo.jpg" alt="Toyota Corolla">
-
-                    <div class="vehiculo-info">
-
-                        <h3>Toyota Corolla XEI</h3>
-
-                        <p>2020 · 65.000 km · Automático</p>
-
-                        <p>$18.500.000</p>
-
-                        <a href="detalle.html?id=1" class="btn">Ver detalles</a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- VEHÍCULO -->
-                <article class="vehiculo-card">
-
-                    <img src="img/autoejemplo.jpg" alt="Volkswagen Vento">
-
-                    <div class="vehiculo-info">
-
-                        <h3>Volkswagen Vento</h3>
-
-                        <p>2019 · 72.000 km · Automático</p>
-
-                        <p>$17.800.000</p>
-
-                        <a href="detalle.html?id=2" class="btn">Ver detalles</a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- VEHÍCULO -->
-                <article class="vehiculo-card">
-
-                    <img src="img/autoejemplo.jpg" alt="Chevrolet Cruze">
-
-                    <div class="vehiculo-info">
-
-                        <h3>Chevrolet Cruze LT</h3>
-
-                        <p>2021 · 48.000 km · Manual</p>
-
-                        <p>$19.200.000</p>
-
-                        <a href="detalle.html?id=3" class="btn">Ver detalles</a>
-
-                    </div>
-
-                </article>
-
-            </div>
+            <!-- JavaScript (js/script.js) crea acá las vehiculo-card de los autos destacados -->
+            <div class="vehiculos-container" id="lista-destacados"></div>
 
             <a href="vehiculos.html" class="btn btn-outline">Ver todos los vehículos</a>
 
@@ -183,6 +124,10 @@
         </a>
 
     </footer>
+
+    <script src="js/script.js" defer></script>
+
+    <script src="js/sesion.js" defer></script>
 
 </body>
 

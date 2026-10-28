@@ -22,9 +22,10 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="vehiculos.html">Vehículos</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
                 <li><a href="financiacion.html">Financiación</a></li>
+                <li><a href="turnos.html">Turnos</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
+                <li id="nav-sesion"><a href="login.html">Ingresar</a></li>
             </ul>
         </nav>
 
@@ -87,38 +88,49 @@
 
                 <h2>Solicitar información</h2>
 
-                <form>
+                <!-- financiacion.js muestra el aviso (visitante) o el formulario (con sesión) -->
+                <div class="aviso-sesion" id="aviso-sesion" hidden>
+                    <p>Para solicitar financiación tenés que iniciar sesión.</p>
+                    <a href="login.html?volver=financiacion.html" class="btn">Iniciar sesión</a>
+                    <a href="registro.html?volver=financiacion.html" class="btn btn-outline">Crear cuenta</a>
+                </div>
+
+                <form id="form-financiacion" hidden>
 
                     <label for="nombre">
                         Nombre completo
                     </label>
 
-                    <input type="text" id="nombre" name="nombre" required>
+                    <input type="text" id="nombre" name="nombre" required maxlength="100" autocomplete="name">
 
 
                     <label for="telefono">
                         Teléfono
                     </label>
 
-                    <input type="tel" id="telefono" name="telefono" required>
+                    <input type="tel" id="telefono" name="telefono" required maxlength="30" autocomplete="tel">
 
 
                     <label for="vehiculo">
                         Vehículo de interés
                     </label>
 
-                    <input type="text" id="vehiculo" name="vehiculo">
+                    <!-- Las opciones las agrega financiacion.js con los autos publicados -->
+                    <select id="vehiculo" name="vehiculo_id">
+                        <option value="">Todavía no sé / ninguno en particular</option>
+                    </select>
 
 
                     <label for="mensaje">
                         Mensaje
                     </label>
 
-                    <textarea id="mensaje" name="mensaje">
-                    </textarea>
+                    <textarea id="mensaje" name="mensaje" maxlength="1000"></textarea>
 
 
                     <button type="submit" class="btn">Solicitar información</button>
+
+                    <p class="mensaje" id="mensaje-financiacion"></p>
 
                 </form>
             </section>
@@ -128,6 +140,11 @@
     <footer>
         <p>2026 Full Cars.</p>
     </footer>
+
+    <script src="js/sesion.js" defer></script>
+
+    <!-- Va DESPUÉS de sesion.js porque usa su variable sesionUsuario -->
+    <script src="js/financiacion.js" defer></script>
 
 </body>
 

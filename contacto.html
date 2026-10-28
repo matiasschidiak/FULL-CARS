@@ -24,9 +24,10 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="vehiculos.html">Vehículos</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
                 <li><a href="financiacion.html">Financiación</a></li>
+                <li><a href="turnos.html">Turnos</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
+                <li id="nav-sesion"><a href="login.html">Ingresar</a></li>
             </ul>
         </nav>
 
@@ -52,7 +53,9 @@
                     <h2>Información</h2>
 
                     <p>
-                        📱 WhatsApp
+                        📱 WhatsApp:
+                        <!-- wa.me necesita el número sin +, espacios ni guiones, y con 9 después del 54 -->
+                        <a href="https://wa.me/5492994154002" target="_blank" rel="noopener" class="enlace-contacto">+54 299 415-4002</a>
                     </p>
 
                     <p>
@@ -67,6 +70,11 @@
                         🕐 Horarios de atención
                     </p>
 
+                    <!-- horario.js lo completa con el horario que carga el admin desde el panel -->
+                    <ul class="lista-horario horario-contacto" id="horario-atencion">
+                        <li>Cargando horario…</li>
+                    </ul>
+
                 </section>
 
 
@@ -75,37 +83,45 @@
 
                     <h2>Enviar consulta</h2>
 
-                    <form>
+                    <!-- contacto.js la envía a api/enviar_consulta.php; el admin la ve en el panel -->
+                    <form id="form-consulta">
 
                         <label for="nombre">
                             Nombre
                         </label>
 
-                        <input type="text" id="nombre" name="nombre" required>
+                        <input type="text" id="nombre" name="nombre" required maxlength="100" autocomplete="name">
 
 
                         <label for="email">
                             Email
                         </label>
 
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required maxlength="150" autocomplete="email">
 
 
                         <label for="telefono">
-                            Teléfono
+                            Teléfono (opcional)
                         </label>
 
-                        <input type="tel" id="telefono" name="telefono">
+                        <input type="tel" id="telefono" name="telefono" maxlength="30" autocomplete="tel">
 
 
                         <label for="mensaje">
                             Mensaje
                         </label>
 
-                        <textarea id="mensaje" name="mensaje" required>
-                        </textarea>
+                        <textarea id="mensaje" name="mensaje" required minlength="5" maxlength="2000"></textarea>
+
+                        <!-- Trampa para robots: una persona no ve este campo y lo deja vacío -->
+                        <div class="campo-trampa" aria-hidden="true">
+                            <label for="sitio_web">No completar</label>
+                            <input type="text" id="sitio_web" name="sitio_web" tabindex="-1" autocomplete="off">
+                        </div>
 
                         <button type="submit" class="btn">Enviar consulta</button>
+
+                        <p class="mensaje" id="mensaje-consulta"></p>
 
                     </form>
                 </section>
@@ -117,6 +133,13 @@
     <footer>
         <p>2026 Full Cars.</p>
     </footer>
+
+    <script src="js/sesion.js" defer></script>
+
+    <script src="js/horario.js" defer></script>
+
+    <!-- Va DESPUÉS de sesion.js porque usa su variable sesionUsuario -->
+    <script src="js/contacto.js" defer></script>
 
 </body>
 

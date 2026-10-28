@@ -24,9 +24,10 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="vehiculos.html">Vehículos</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
                 <li><a href="financiacion.html">Financiación</a></li>
+                <li><a href="turnos.html">Turnos</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
+                <li id="nav-sesion"><a href="login.html">Ingresar</a></li>
             </ul>
 
         </nav>
@@ -34,17 +35,18 @@
     </header>
     <main>
 
-        <section class="detalle-vehiculo">
+        <!-- JavaScript (js/script.js) completa los elementos con id según el ?id= de la URL -->
+        <section class="detalle-vehiculo" id="detalle-vehiculo">
 
 
             <!-- GALERÍA -->
             <section class="galeria">
-                <img src="img/autoejemplo.jpg" alt="Toyota Corolla XEI">
+                <img id="det-imagen" src="img/autoejemplo.jpg" alt="">
 
                 <div class="miniaturas">
-                    <img src="img/autoejemplo.jpg" alt="Toyota Corolla">
-                    <img src="img/autoejemplo.jpg" alt="Toyota Corolla">
-                    <img src="img/autoejemplo.jpg" alt="Toyota Corolla">
+                    <img src="img/autoejemplo.jpg" alt="">
+                    <img src="img/autoejemplo.jpg" alt="">
+                    <img src="img/autoejemplo.jpg" alt="">
 
                 </div>
             </section>
@@ -53,13 +55,11 @@
             <!-- INFORMACIÓN -->
             <section class="informacion-vehiculo">
 
-                <span class="marca">
-                    Toyota
-                </span>
+                <span class="marca" id="det-marca"></span>
 
-                <h1>Corolla XEI</h1>
+                <h1 id="det-modelo">Cargando vehículo…</h1>
 
-                <h2>$18.500.000</h2>
+                <h2 id="det-precio"></h2>
 
 
                 <!-- CARACTERÍSTICAS -->
@@ -67,27 +67,27 @@
 
                     <div>
                         <span>Año</span>
-                        <strong>2020</strong>
+                        <strong id="det-anio">—</strong>
                     </div>
 
                     <div>
                         <span>Kilometraje</span>
-                        <strong>65.000 km</strong>
+                        <strong id="det-kilometraje">—</strong>
                     </div>
 
                     <div>
                         <span>Motor</span>
-                        <strong>2.0</strong>
+                        <strong id="det-motor">—</strong>
                     </div>
 
                     <div>
                         <span>Combustible</span>
-                        <strong>Nafta</strong>
+                        <strong id="det-combustible">—</strong>
                     </div>
 
                     <div>
                         <span>Transmisión</span>
-                        <strong>Automático</strong>
+                        <strong id="det-transmision">—</strong>
                     </div>
 
                 </div>
@@ -98,29 +98,17 @@
 
                     <h2>Descripción</h2>
 
-                    <p>
-                        Toyota Corolla XEI en excelente estado,
-                        con mantenimiento al día y muy buenas
-                        condiciones generales.
-                    </p>
+                    <p id="det-descripcion"></p>
 
                 </div>
 
 
-                <!-- CARACTERÍSTICAS -->
-                <div class="equipamiento">
+                <!-- EQUIPAMIENTO (se oculta si el auto no tiene cargado ninguno) -->
+                <div class="equipamiento" id="det-equipamiento-box">
 
                     <h2>Equipamiento</h2>
 
-                    <ul>
-
-                        <li>Cámara de retroceso</li>
-                        <li>Pantalla multimedia</li>
-                        <li>Control crucero</li>
-                        <li>Climatizador</li>
-                        <li>Sensores de estacionamiento</li>
-
-                    </ul>
+                    <ul id="det-equipamiento"></ul>
 
                 </div>
 
@@ -128,7 +116,11 @@
                 <!-- CONTACTO -->
                 <div class="contactar">
 
-                    <a href="#" class="btn">Consultar por WhatsApp</a>
+                    <!-- script.js arma el enlace con el número y el nombre del auto -->
+                    <a href="#" class="btn" id="det-whatsapp" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+
+                    <!-- script.js le agrega ?vehiculo=ID para que el auto quede elegido -->
+                    <a href="turnos.html" class="btn btn-outline" id="det-turno">Sacar turno para verlo</a>
 
                     <a href="contacto.html" class="btn btn-outline">Contactar con Full Cars</a>
 
@@ -142,6 +134,10 @@
         <p>2026 Full Cars.</p>
 
     </footer>
+
+    <script src="js/script.js" defer></script>
+
+    <script src="js/sesion.js" defer></script>
 
 </body>
 
