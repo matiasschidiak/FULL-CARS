@@ -460,6 +460,28 @@ form select {
     margin-left: 0.5rem;
 }
 
+/* Columna Estado (turnos, financiación, consultas): la etiqueta arriba y los botones
+   abajo, en lugar de todo en un renglón; así la tabla entra sin deslizarla */
+.celda-estado {
+    min-width: 150px;
+}
+
+.celda-estado .btn-chico {
+    display: block;          /* cada botón en su propio renglón, debajo de la etiqueta */
+    margin-top: 0.4rem;
+    white-space: nowrap;
+}
+
+/* Un poco menos de espacio interno en las tablas de 7-8 columnas, para que entren enteras */
+.tabla-consultas td,
+.tabla-consultas th,
+#pestana-turnos .tabla td,
+#pestana-turnos .tabla th,
+#pestana-financiacion .tabla td,
+#pestana-financiacion .tabla th {
+    padding: 0.7rem 0.6rem;
+}
+
 /* Botones chicos de la columna Acciones */
 .acciones {
     white-space: nowrap;
@@ -631,7 +653,7 @@ form select {
 
 .vehiculos-destacados .vehiculos-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* auto-fill: con pocos autos, las tarjetas no se estiran */
     gap: 1.5rem;
 }
 
@@ -702,7 +724,7 @@ form select {
 
 .catalogo .vehiculos-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* auto-fill: con pocos autos, las tarjetas no se estiran */
     gap: 1.5rem;
 }
 

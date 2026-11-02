@@ -131,7 +131,7 @@ async function cargarSolicitudes() {
 
       // Columna Estado: etiqueta + botón para cambiarlo
       const celdaEstado = document.createElement("td");
-      celdaEstado.classList.add("acciones");
+      celdaEstado.classList.add("celda-estado"); // etiqueta arriba y botones abajo
       const etiqueta = document.createElement("span");
       etiqueta.classList.add("estado", atendida ? "estado-atendida" : "estado-pendiente");
       etiqueta.textContent = atendida ? "Atendida" : "Pendiente";
@@ -219,7 +219,7 @@ async function cargarTurnos() {
 
       // Estado: etiqueta + botones según el estado actual
       const celdaEstado = document.createElement("td");
-      celdaEstado.classList.add("acciones");
+      celdaEstado.classList.add("celda-estado"); // etiqueta arriba y botones abajo
       const etiqueta = document.createElement("span");
       etiqueta.classList.add("estado", "estado-" + t.estado);
       etiqueta.textContent = t.estado.charAt(0).toUpperCase() + t.estado.slice(1);
@@ -322,7 +322,7 @@ async function cargarConsultas() {
 
       // Estado: etiqueta + botón para cambiarlo
       const celdaEstado = document.createElement("td");
-      celdaEstado.classList.add("acciones");
+      celdaEstado.classList.add("celda-estado"); // etiqueta arriba y botones abajo
       const etiqueta = document.createElement("span");
       etiqueta.classList.add("estado", respondida ? "estado-atendida" : "estado-pendiente");
       etiqueta.textContent = respondida ? "Respondida" : "Pendiente";
