@@ -460,7 +460,7 @@ form select {
     margin-left: 0.5rem;
 }
 
-/* Columna Estado (turnos, financiación, consultas): la etiqueta arriba y los botones
+/* Columna Estado (turnos y financiación): la etiqueta arriba y los botones
    abajo, en lugar de todo en un renglón; así la tabla entra sin deslizarla */
 .celda-estado {
     min-width: 150px;
@@ -473,8 +473,6 @@ form select {
 }
 
 /* Un poco menos de espacio interno en las tablas de 7-8 columnas, para que entren enteras */
-.tabla-consultas td,
-.tabla-consultas th,
 #pestana-turnos .tabla td,
 #pestana-turnos .tabla th,
 #pestana-financiacion .tabla td,
@@ -541,18 +539,6 @@ form select {
 .estado-cancelado {
     background: #fde3e6;
     color: #a3001c;
-}
-
-/* En Consultas el mensaje es lo más importante: que tenga lugar para leerse */
-.tabla-consultas td:nth-child(5) {
-    min-width: 280px;
-}
-
-/* "con cuenta" debajo del email en Consultas */
-.marca-cuenta {
-    display: block;
-    color: #888;
-    font-size: 0.75rem;
 }
 
 .fila-atendida td {
@@ -802,16 +788,6 @@ form select {
     list-style: none;
     display: grid;
     gap: 0.2rem;
-}
-
-/* Campo trampa para robots: fuera de la pantalla (no se usa "hidden" ni display: none
-   porque muchos robots saltean esos campos y así la trampa no funcionaría) */
-.campo-trampa {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
 }
 
 .enlace-contacto {

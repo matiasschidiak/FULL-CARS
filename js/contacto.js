@@ -1,5 +1,9 @@
-// js/contacto.js — envía el formulario de Contacto a la API (cualquiera puede enviarlo).
+// js/contacto.js — el formulario de Contacto abre WhatsApp con el mensaje del cliente.
+// No se guarda nada en la base: la consulta llega directo al WhatsApp de Full Cars.
 // Usa sesionUsuario, que viene de js/sesion.js (se carga antes que este archivo).
+
+// WhatsApp de Full Cars (+54 299 415-4002) en el formato de wa.me: 54 + 9 + número
+const WHATSAPP_FULLCARS = "5492994154002";
 
 const formConsulta = document.getElementById("form-consulta");
 const mensajeConsulta = document.getElementById("mensaje-consulta");
@@ -12,34 +16,24 @@ async function completarConSesion() {
   if (usuario.email) document.getElementById("email").value = usuario.email;
 }
 
-// Enviar la consulta a la API
-formConsulta.addEventListener("submit", async (evento) => {
-  evento.preventDefault(); // antes, el navegador ponía los datos en la dirección y no se guardaban
-  const boton = formConsulta.querySelector("button");
-  boton.disabled = true;
-  mensajeConsulta.textContent = "Enviando…";
+// Armar el mensaje con los datos del formulario y abrir WhatsApp
+formConsulta.addEventListener("submit", (evento) => {
+  evento.preventDefault(); // no se envía a ningún lado: solo abrimos WhatsApp
 
-  try {
-    const respuesta = await fetch("api/enviar_consulta.php", {
-      method: "POST",
-      body: new FormData(formConsulta),
-    });
-    const datos = await respuesta.json();
+  const nombre = document.getElementById("nombre").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const mensaje = document.getElementById("mensaje").value.trim();
 
-    if (!respuesta.ok) {
-      mensajeConsulta.textContent = datos.error;
-      return;
-    }
+  // Un renglón por dato; el email solo si lo completó
+  let texto = "¡Hola Full Cars! Soy " + nombre + ".";
+  if (email) texto += "\nEmail: " + email;
+  texto += "\n\n" + mensaje;
 
-    mensajeConsulta.textContent = datos.mensaje;
-    formConsulta.reset();
-    completarConSesion(); // vuelve a poner nombre y email si tiene sesión
-  } catch (error) {
-    console.error(error);
-    mensajeConsulta.textContent = "No se pudo conectar con el servidor.";
-  } finally {
-    boton.disabled = false;
-  }
+  // encodeURIComponent: convierte espacios, tildes y saltos de línea al formato de una dirección
+  const enlace = "https://wa.me/" + WHATSAPP_FULLCARS + "?text=" + encodeURIComponent(texto);
+  window.open(enlace, "_blank", "noopener"); // abre WhatsApp en otra pestaña (o la app en el celular)
+
+  mensajeConsulta.textContent = "Se abrió WhatsApp con tu mensaje: solo tenés que tocar Enviar.";
 });
 
 completarConSesion();

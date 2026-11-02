@@ -287,114 +287,6 @@ async function cambiarEstadoTurno(id, estado) {
   }
 }
 
-// ---------- Consultas de Contacto ----------
-
-// Pide las consultas y arma su tabla
-async function cargarConsultas() {
-  const cuerpo = document.getElementById("lista-consultas");
-  const mensaje = document.getElementById("mensaje-consultas");
-
-  try {
-    const respuesta = await fetch("api/consultas.php");
-    const consultas = await respuesta.json();
-
-    if (!respuesta.ok) {
-      mensaje.textContent = consultas.error;
-      return;
-    }
-
-    const pendientes = consultas.filter((c) => c.estado === "pendiente").length;
-    document.getElementById("cantidad-consultas").textContent =
-      "(" + pendientes + (pendientes === 1 ? " pendiente)" : " pendientes)");
-    actualizarContador("contador-consultas", pendientes);
-
-    cuerpo.replaceChildren();
-    if (consultas.length === 0) {
-      mensaje.hidden = false;
-      mensaje.textContent = "Todavía no llegó ninguna consulta.";
-      return;
-    }
-    mensaje.hidden = true;
-
-    consultas.forEach((c) => {
-      const respondida = c.estado === "respondida";
-      const primerNombre = c.nombre.split(" ")[0];
-
-      // Estado: etiqueta + botón para cambiarlo
-      const celdaEstado = document.createElement("td");
-      celdaEstado.classList.add("celda-estado"); // etiqueta arriba y botones abajo
-      const etiqueta = document.createElement("span");
-      etiqueta.classList.add("estado", respondida ? "estado-atendida" : "estado-pendiente");
-      etiqueta.textContent = respondida ? "Respondida" : "Pendiente";
-      celdaEstado.append(
-        etiqueta,
-        crearBotonChico(
-          respondida ? "Volver a pendiente" : "Marcar respondida",
-          () => cambiarEstadoConsulta(c.id, respondida ? "pendiente" : "respondida")
-        )
-      );
-
-      // Email: abre el correo con el asunto ya escrito
-      const asunto = "Respuesta a tu consulta en Full Cars";
-      const celdaEmail = crearCelda(
-        c.email,
-        "mailto:" + c.email + "?subject=" + encodeURIComponent(asunto) +
-          "&body=" + encodeURIComponent("Hola " + primerNombre + ",\n\n")
-      );
-      if (c.tiene_cuenta) {
-        // Marca chiquita para saber si la escribió alguien registrado o un visitante
-        const marca = document.createElement("small");
-        marca.classList.add("marca-cuenta");
-        marca.textContent = "con cuenta";
-        celdaEmail.appendChild(marca);
-      }
-
-      // Teléfono (opcional): con WhatsApp si se puede, si no "—"
-      const celdaTelefono = c.telefono
-        ? crearCeldaTelefono(
-            c.telefono,
-            "¡Hola " + primerNombre + "! Te escribimos de Full Cars por la consulta que nos dejaste en la página."
-          )
-        : crearCelda("");
-
-      const fila = document.createElement("tr");
-      if (respondida) fila.classList.add("fila-atendida");
-      fila.append(
-        crearCelda(formatoFecha.format(new Date(c.creado_en.replace(" ", "T")))),
-        crearCelda(c.nombre),
-        celdaEmail,
-        celdaTelefono,
-        crearCelda(c.mensaje),
-        celdaEstado
-      );
-      cuerpo.appendChild(fila);
-    });
-  } catch (error) {
-    console.error(error);
-    mensaje.textContent = "No se pudieron cargar las consultas.";
-  }
-}
-
-// Marca una consulta como respondida o pendiente
-async function cambiarEstadoConsulta(id, estado) {
-  const datosEnvio = new FormData();
-  datosEnvio.append("id", id);
-  datosEnvio.append("estado", estado);
-
-  try {
-    const respuesta = await fetch("api/estado_consulta.php", { method: "POST", body: datosEnvio });
-    const datos = await respuesta.json();
-    if (!respuesta.ok) {
-      alert(datos.error);
-      return;
-    }
-    cargarConsultas(); // se reordena: las pendientes siempre arriba
-  } catch (error) {
-    console.error(error);
-    alert("No se pudo conectar con el servidor.");
-  }
-}
-
 // ---------- Solicitudes: cambiar estado ----------
 
 // Envía el nuevo estado a la API y vuelve a dibujar la lista
@@ -702,7 +594,7 @@ formHorario.addEventListener("submit", async (evento) => {
 // 8) Menú del panel: pestañas
 //    La pestaña elegida queda en la dirección (panel.html#turnos): si recargás, seguís ahí.
 
-const PESTANAS = ["vehiculos", "turnos", "financiacion", "consultas", "horarios"];
+const PESTANAS = ["vehiculos", "turnos", "financiacion", "horarios"];
 
 // Muestra la pestaña del # de la dirección y oculta las demás
 function mostrarPestana() {
@@ -737,7 +629,6 @@ async function iniciar() {
   cargarVehiculosPanel();
   cargarTurnos();
   cargarSolicitudes();
-  cargarConsultas();
   cargarHorario();
 }
 
